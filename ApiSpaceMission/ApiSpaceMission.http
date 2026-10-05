@@ -1,0 +1,6 @@
+@ApiSpaceMission_HostAddress = http://localhost:5117
+
+GET {{ApiSpaceMission_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
