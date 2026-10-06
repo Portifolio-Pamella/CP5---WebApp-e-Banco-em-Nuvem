@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -32,10 +31,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs-webapp-url }}
-
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -43,7 +38,6 @@ jobs:
           name: .net-app
 
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'app-space-rm565206'
