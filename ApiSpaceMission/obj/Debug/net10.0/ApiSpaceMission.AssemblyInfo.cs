@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiSpaceMission")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4895c95958602a9916f9fe81f88d8045c949e79")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a08508f587499b24db659ab9a71115c490f73034")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiSpaceMission")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiSpaceMission")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

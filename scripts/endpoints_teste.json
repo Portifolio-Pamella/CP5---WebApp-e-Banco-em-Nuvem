@@ -1,0 +1,26 @@
+{
+  "Missoes": {
+    "POST_Criar_Missao": {
+      "nome": "Artemis III",
+      "destino": "Lua"
+    },
+    "PUT_Atualizar_Missao": {
+      "id": 1,
+      "nome": "Artemis III - Atualizada",
+      "destino": "Lua (Base Sul)"
+    }
+  },
+  "Astronautas": {
+    "POST_Criar_Astronauta": {
+      "nome": "Jessica Meir",
+      "especialidade": "Engenheira de Voo",
+      "missaoId": 1
+    },
+    "PUT_Atualizar_Astronauta": {
+      "id": 1,
+      "nome": "Jessica Meir",
+      "especialidade": "Comandante de Missão",
+      "missaoId": 1
+    }
+  }
+}

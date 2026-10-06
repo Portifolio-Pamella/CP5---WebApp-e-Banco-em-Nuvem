@@ -1,0 +1,24 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# .NET
+**/bin/
+**/obj/
+
+# Build
+[Bb]uild/
+[Bb]uilds/
+
+# VS Code
+.vscode/
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
