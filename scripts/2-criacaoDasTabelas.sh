@@ -1,6 +1,6 @@
-Invoke-Sqlcmd -ServerInstance "sql-server-space-rm565206-canadacentral.database.windows.net" `
+Invoke-Sqlcmd -ServerInstance "sql-server-space-rm565206-canadacentral-v2.database.windows.net" `
               -Database "db-spacemission" `
-              -Username "admin-space" `
+              -Username "user-space" `
               -Password "Fiap@2tdsvms" `
               -Query @"
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Missoes' AND xtype='U')
