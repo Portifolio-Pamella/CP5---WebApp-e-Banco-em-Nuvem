@@ -1,6 +1,3 @@
-Aqui tem o seu `README.md` atualizado e reorganizado para mapear explicitamente a execução dos seus arquivos de script (`1-criarBanco.sh`, `2-criacaoDasTabelas.sh` e `3-deploy.sh`), mantendo todo o restante do conteúdo alinhado e estruturado.
-
-```markdown
 🚀 ApiSpaceMission - Gerenciamento Espacial
 
 📋 Resumo do Projeto
