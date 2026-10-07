@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("4db5cb4a-e1b3-45a8-87af-85e32f5522aa")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiSpaceMission")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0cd919daed76f90b0e70bb8103184598097891b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+887cd234f1710f109d1113a187de589470b3c26c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiSpaceMission")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiSpaceMission")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
