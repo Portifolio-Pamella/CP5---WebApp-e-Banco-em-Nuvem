@@ -79,15 +79,53 @@ Invoke-Sqlcmd -ServerInstance "sql-server-space-rm565206-canadacentral.database.
 
 ---
 
-### Passo 3: Configurar a API Localmente
+Para atualizar o seu `README.md` de forma profissional e garantir que quem consultar o seu repositório saiba como configurar o projeto de forma segura usando o **User Secrets** (sem expor credenciais no código), substitua essa secção do seu README pelo seguinte texto:
 
-Antes de subir a aplicação para o Azure, conecte-a ao banco recém-criado:
+```markdown
+### Passo 3: Configurar a API Localmente de Forma Segura
 
-1. No projeto .NET, abra o arquivo `appsettings.json` e adicione a sua Connection String:
-```json
-"ConnectionStrings": {
-  "AzureSqlConnection": "Server=tcp:sql-server-space-rm565206-canadacentral.database.windows.net,1433;Initial Catalog=db-spacemission;Persist Security Info=False;User ID=admin-space;Password=Fiap@2tdsvms;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-}
+Para proteger as credenciais de acesso ao banco de dados e evitar expor dados sensíveis no histórico do Git, utilize o **dotnet user-secrets** para configurar a sua string de conexão localmente:
+
+1. Navegue até a pasta do projeto da API no seu terminal:
+   ```bash
+   cd ApiSpaceMission
+
+```
+
+2. Inicialize o armazenamento de segredos do utilizador (caso ainda não esteja inicializado):
+```bash
+dotnet user-secrets init
+
+```
+
+
+3. Adicione a sua Connection String utilizando o comando abaixo (substituindo pelos dados reais, incluindo o servidor correto):
+```bash
+dotnet user-secrets set "ConnectionStrings:AzureSqlConnection" "Server=tcp:sql-server-space-rm565206-canadacentral-v2.database.windows.net,1433;Initial Catalog=db-spacemission;Persist Security Info=False;User ID=admin-space;Password=SUA_SENHA_AQUI;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+
+```
+
+
+
+O .NET irá injetar esta string automaticamente de forma segura durante a execução local, mantendo o seu ficheiro `appsettings.json` limpo e livre de dados sensíveis.
+
+```
+
+<Steps>
+  <Step subtitle="Atualizar Documentação" title="Modificar o README.md">
+    Cole o bloco acima no seu ficheiro `README.md` substituindo a secção antiga.
+  </Step>
+
+  <Step subtitle="Commit Final" title="Enviar para o GitHub">
+    Execute os comandos finais no terminal para atualizar o repositório:
+    ```bash
+    git add .
+    git commit -m "docs: atualiza instruções do README para uso seguro de User Secrets"
+    git push origin main
+    ```
+  </Step>
+</Steps>
+
 
 ```
 
