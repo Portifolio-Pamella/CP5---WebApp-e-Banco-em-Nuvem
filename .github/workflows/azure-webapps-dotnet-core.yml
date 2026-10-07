@@ -44,4 +44,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'app-space-v2-rm565206'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: '.'
