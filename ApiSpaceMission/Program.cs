@@ -1,20 +1,28 @@
-deploy:
-runs - on: ubuntu - latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${ { steps.deploy - to - webapp.outputs.webapp - url } }
+using ApiSpaceMission.Data;
+using Microsoft.EntityFrameworkCore;
 
-steps:
--name: Download artifact from build job
-        uses: actions / download - artifact@v4
-        with:
-          name: .net - app
+var builder = WebApplication.CreateBuilder(args);
 
-      - name: 'Deploy to Azure Web App'
-        id: deploy - to - webapp
-        uses: azure / webapps - deploy@v3
-        with:
-          app - name: 'app-space-v2-rm565206'
-          publish - profile: ${ { secrets.AZURE_WEBAPP_PUBLISH_PROFILE } }
-package: '.'
+// Configurar a conexão com o Azure SQL Server de forma segura
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("AzureSqlConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()
+    ));
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiSpaceMission v1");
+    c.RoutePrefix = string.Empty;
+});
+
+app.UseHttpsRedirection();
+app.MapControllers();
+app.Run();
