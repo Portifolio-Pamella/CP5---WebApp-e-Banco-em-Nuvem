@@ -1,12 +1,27 @@
-🚀 ApiSpaceMission - Gerenciamento Espacial
+Aqui está o ficheiro **`README.md`** completo, estruturado e corrigido para o seu projeto, incluindo a secção de integrantes (com o destaque da representante), a arquitetura, o mapeamento dos endpoints, e um tutorial (*How-To*) detalhado e aprofundado na configuração do **GitHub Actions (CI/CD)** e do **User Secrets**.
 
-📋 Resumo do Projeto
+Pode copiar todo o conteúdo abaixo diretamente para o seu ficheiro `README.md`:
 
-A ApiSpaceMission é uma API RESTful desenvolvida em .NET 8 utilizando Entity Framework Core. O sistema gerencia o cadastro de Missões Espaciais e seus respectivos Astronautas, implementando um relacionamento de um para menos (1:N) com operações completas de CRUD.
+```markdown
+# 🚀 ApiSpaceMission - Gerenciamento Espacial
 
-A aplicação foi projetada para rodar em um ambiente de nuvem (Cloud Computing), utilizando o Azure SQL Database (PaaS) para a persistência de dados (não containerizado) e o Azure App Service (Web App) para a hospedagem da API. O fluxo de publicação (deploy) é totalmente automatizado via GitHub Actions (CI/CD).
+## 👥 Integrantes do Grupo
+* **Felipe Ribeiro Salles de Camargo** | RM565224
+* **João Pedro Pereira Camilo** | RM562005
+* **Lucas Matsubara Reis** | RM565020
+* **Pamella Christiny Chaves Brito** | RM565206 **(Representante)**
 
-🎥 Demonstração e Explicação
+---
+
+## 📋 Resumo do Projeto
+
+A **ApiSpaceMission** é uma API RESTful desenvolvida em .NET 8 utilizando Entity Framework Core. O sistema gerencia o cadastro de Missões Espaciais e seus respectivos Astronautas, implementando um relacionamento de um para muitos (1:N) com operações completas de CRUD.
+
+A aplicação foi projetada para rodar em um ambiente de nuvem (*Cloud Computing*), utilizando o **Azure SQL Database (PaaS)** para a persistência de dados (não containerizado) e o **Azure App Service (Web App)** para a hospedagem da API. O fluxo de publicação (*deploy*) é totalmente automatizado via **GitHub Actions (CI/CD)**.
+
+---
+
+## 🎥 Demonstração e Explicação
 
 👉 [Clique aqui para assistir ao vídeo de demonstração do projeto e implantação](#coloque-o-link-do-seu-video-do-youtube-aqui)
 
@@ -14,7 +29,7 @@ A aplicação foi projetada para rodar em um ambiente de nuvem (Cloud Computing)
 
 ## 🏗️ Arquitetura da Solução
 
-A arquitetura do projeto utiliza Microsoft Azure para hospedagem da API e persistência dos dados, com integração contínua por meio do GitHub Actions.
+A arquitetura do projeto utiliza o Microsoft Azure para a hospedagem da API e persistência dos dados, com integração contínua e entrega contínua geridas pelo GitHub Actions.
 
 ![Arquitetura Azure](./scripts/img-arquitetura/arquitetura%20azure.png)
 
@@ -29,45 +44,45 @@ A arquitetura do projeto utiliza Microsoft Azure para hospedagem da API e persis
 * `PUT /api/Astronautas/{id}` - Atualiza os dados de um astronauta existente.
 * `DELETE /api/Astronautas/{id}` - Deleta um astronauta do banco de dados.
 
-### 🚀 Missoes
+### 🚀 Missões
 * `GET /api/Missoes` - Retorna a lista de todas as missões espaciais.
 * `POST /api/Missoes` - Cria uma nova missão espacial.
 * `GET /api/Missoes/{id}` - Retorna os detalhes de uma missão específica buscando pelo seu ID.
 * `PUT /api/Missoes/{id}` - Atualiza os dados de uma missão existente.
-* `DELETE /api/Missoes/{id}` - Remove uma missão do sistema (o Delete Cascade apagará os astronautas vinculados a ela).
+* `DELETE /api/Missoes/{id}` - Remove uma missão do sistema (o *Delete Cascade* apagará os astronautas vinculados a ela).
 
 ---
 
 ## ☁️ Tutorial de Implantação em Nuvem (How-To)
 
-Siga este passo a passo cronológico baseado na execução dos scripts do projeto para subir a infraestrutura completa do zero no Microsoft Azure e realizar o deploy da aplicação.
+Siga este passo a passo cronológico para subir a infraestrutura completa do zero no Microsoft Azure, configurar o ambiente e realizar o deploy automatizado da aplicação via GitHub Actions.
 
 ### Pré-requisitos
 * Conta ativa no Microsoft Azure.
+* .NET 8 SDK instalado localmente.
 * Azure CLI instalado ou acesso ao Azure Cloud Shell.
-* Código hospedado em um repositório no GitHub.
+* Código fonte hospedado em um repositório no GitHub.
 
 ---
 
 ### Passo 1: Criar o Banco de Dados Azure SQL (PaaS)
-A primeira etapa é executar o script de provisionamento para criar o grupo de recursos, o servidor SQL na nuvem e o banco de dados.
+A primeira etapa é executar o script de provisionamento para criar o grupo de recursos, o servidor SQL na nuvem e a base de dados.
 
-* **Arquivo a executar:** `1-criarBanco.sh`
-* **O que faz:** Cria o grupo de recursos `rg-sql-spacemission` na região `canadacentral`, configura o servidor primário `sql-server-space-rm565206-canadacentral`, inicializa o banco `db-spacemission` e libera as regras de firewall para acesso externo.
+* **Arquivo de referência:** `1-criarBanco.sh`
+* **O que faz:** Cria o grupo de recursos `rg-sql-spacemission` na região `canadacentral`, configura o servidor primário `sql-server-space-v2-rm565206-canadacentral-v2`, inicializa o banco `db-space-rm565206` e libera as regras de firewall para acesso externo.
 
 ---
 
 ### Passo 2: Criar as Tabelas e Povoar o Banco
 Com o banco provisionado, utilize o script correspondente para gerar a estrutura relacional das tabelas e os dados iniciais.
 
-* **Arquivo a executar:** `2-criacaoDasTabelas.sh` (ou execute via PowerShell com o comando `Invoke-Sqlcmd` equivalente).
-* **O que faz:** Conecta-se ao banco `db-spacemission` para criar as tabelas `Missoes` e `Astronautas` com restrição de chave estrangeira em cascata, inserindo registros de teste iniciais.
-
+* **Arquivo de referência:** `2-criacaoDasTabelas.sh` (ou execute via PowerShell com o comando `Invoke-Sqlcmd` equivalente).
+* **Comando SQL de execução:**
 ```powershell
-Invoke-Sqlcmd -ServerInstance "sql-server-space-rm565206-canadacentral.database.windows.net" `
-              -Database "db-spacemission" `
-              -Username "admin-space" `
-              -Password "Fiap@2tdsvms" `
+Invoke-Sqlcmd -ServerInstance "sql-server-space-v2-rm565206-canadacentral-v2.database.windows.net" `
+              -Database "db-space-rm565206" `
+              -Username "user-space" `
+              -Password "Fiap2026!" `
               -Query "
                 CREATE TABLE Missoes (Id INT IDENTITY(1,1) PRIMARY KEY, Nome NVARCHAR(MAX) NOT NULL, Destino NVARCHAR(MAX) NOT NULL);
                 CREATE TABLE Astronautas (Id INT IDENTITY(1,1) PRIMARY KEY, Nome NVARCHAR(MAX) NOT NULL, Especialidade NVARCHAR(MAX) NOT NULL, MissaoId INT NOT NULL, CONSTRAINT FK_Astronautas_Missoes FOREIGN KEY (MissaoId) REFERENCES Missoes(Id) ON DELETE CASCADE);
@@ -79,18 +94,16 @@ Invoke-Sqlcmd -ServerInstance "sql-server-space-rm565206-canadacentral.database.
 
 ---
 
-Para atualizar o seu `README.md` de forma profissional e garantir que quem consultar o seu repositório saiba como configurar o projeto de forma segura usando o **User Secrets** (sem expor credenciais no código), substitua essa secção do seu README pelo seguinte texto:
-
-```markdown
-### Passo 3: Configurar a API Localmente de Forma Segura
+### Passo 3: Configurar a API Localmente de Forma Segura (User Secrets)
 
 Para proteger as credenciais de acesso ao banco de dados e evitar expor dados sensíveis no histórico do Git, utilize o **dotnet user-secrets** para configurar a sua string de conexão localmente:
 
 1. Navegue até a pasta do projeto da API no seu terminal:
-   ```bash
-   cd ApiSpaceMission
+```bash
+cd ApiSpaceMission
 
 ```
+
 
 2. Inicialize o armazenamento de segredos do utilizador (caso ainda não esteja inicializado):
 ```bash
@@ -99,41 +112,79 @@ dotnet user-secrets init
 ```
 
 
-3. Adicione a sua Connection String utilizando o comando abaixo (substituindo pelos dados reais, incluindo o servidor correto):
+3. Adicione a sua Connection String utilizando o comando abaixo:
 ```bash
-dotnet user-secrets set "ConnectionStrings:AzureSqlConnection" "Server=tcp:sql-server-space-rm565206-canadacentral-v2.database.windows.net,1433;Initial Catalog=db-spacemission;Persist Security Info=False;User ID=admin-space;Password=SUA_SENHA_AQUI;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+dotnet user-secrets set "ConnectionStrings:AzureSqlConnection" "Server=tcp:sql-server-space-v2-rm565206-canadacentral-v2.database.windows.net,1433;Initial Catalog=db-space-rm565206;Persist Security Info=False;User ID=user-space;Password=Fiap2026!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 
 ```
 
 
+*Nota: O .NET injeta esta string automaticamente durante a execução local, mantendo o seu ficheiro `appsettings.json` limpo e livre de dados sensíveis.*
 
-O .NET irá injetar esta string automaticamente de forma segura durante a execução local, mantendo o seu ficheiro `appsettings.json` limpo e livre de dados sensíveis.
+---
 
-```
+### Passo 4: Criar o Serviço de Hospedagem (Web App) no Azure
 
-<Steps>
-  <Step subtitle="Atualizar Documentação" title="Modificar o README.md">
-    Cole o bloco acima no seu ficheiro `README.md` substituindo a secção antiga.
-  </Step>
+Execute o script de publicação do serviço de aplicação onde a API irá rodar.
 
-  <Step subtitle="Commit Final" title="Enviar para o GitHub">
-    Execute os comandos finais no terminal para atualizar o repositório:
-    ```bash
-    git add .
-    git commit -m "docs: atualiza instruções do README para uso seguro de User Secrets"
-    git push origin main
-    ```
-  </Step>
-</Steps>
+* **Arquivo de referência:** `3-deploy.sh`
+* **O que faz:** Cria o plano de serviço Linux, o Web App `app-space-v2-rm565206` configurado para o runtime do .NET 8, e permite extrair o perfil de publicação (`Publish Profile`).
+
+---
+
+### Passo 5: Configurar CI/CD com GitHub Actions (Passo a Passo Detalhado)
+
+Para automatizar o processo de build e deploy sempre que enviar código para o repositório, o GitHub Actions precisa de aceder ao Azure através de um perfil de publicação seguro (*Publish Profile*). Siga rigorosamente este procedimento:
+
+1. **Obter o Publish Profile no Azure:**
+* Aceda ao [Portal do Azure](https://www.google.com/search?q=https://portal.azure.com/).
+* Procure e abra o seu Web App (`app-space-v2-rm565206`).
+* No topo da página de visão geral (*Overview*), clique no botão **Obter perfil de publicação** (*Get publish profile*). Um ficheiro com extensão `.publishsettings` será descarregado para o seu computador.
+* Abra este ficheiro utilizando um editor de texto (como o Bloco de Notas, VS Code ou Notepad++) e **copie todo o conteúdo XML** de dentro dele.
 
 
-```
+2. **Configurar o Secret no Repositório do GitHub:**
+* Abra o seu repositório no GitHub.
+* Clique no separador **Settings** (Definições) no menu superior do repositório.
+* Na barra lateral esquerda, expanda **Secrets and variables** e clique em **Actions**.
+* Clique no botão verde **New repository secret**.
+* No campo **Name**, digite exatamente: `AZURE_WEBAPP_PUBLISH_PROFILE`.
+* No campo **Value**, cole todo o conteúdo XML do ficheiro `.publishsettings` que copiou no passo anterior.
+* Clique em **Add secret** para guardar.
 
 
-2. Abra o arquivo `Program.cs` e garanta que o Swagger esteja habilitado também em produção (removendo a verificação do ambiente de desenvolvimento, caso necessário):
-```csharp
-app.UseSwagger();
-app.UseSwaggerUI();
+3. **Estrutura do Workflow (.github/workflows/deploy.yml):**
+Certifique-se de que o ficheiro de pipeline configurado no seu repositório (`.github/workflows/deploy.yml`) possui uma estrutura compatível com o .NET 8 e o Web App do Azure, realizando o restore, build, publish e o deploy utilizando o secret criado:
+```yaml
+name: Build and Deploy .NET App to Azure App Service
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build with dotnet
+      run: dotnet build ApiSpaceMission/ApiSpaceMission.csproj --configuration Release
+
+    - name: dotnet publish
+      run: dotnet publish ApiSpaceMission/ApiSpaceMission.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Run Azure WebApp Deploy
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: 'app-space-v2-rm565206'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: '${{env.DOTNET_ROOT}}/myapp'
 
 ```
 
@@ -141,43 +192,22 @@ app.UseSwaggerUI();
 
 ---
 
-### Passo 4: Criar o Serviço de Hospedagem (Web App)
+### Passo 6: Disparar o Deploy Automático e Validar
 
-Execute o script de publicação do serviço de aplicação onde a API irá rodar e extraia as credenciais de deploy.
-
-* **Arquivo a executar:** `3-deploy.sh` (ou os comandos equivalentes de criação do Plano de Serviço, Web App e obtenção do Publish Profile).
-* **O que faz:** Cria o plano gratuito Linux (`plan-space-rm565206`), o Web App (`app-space-rm565206`) para .NET 8 e gera o arquivo XML de credenciais (`publish_profile.xml`).
-
----
-
-### Passo 5: Configurar CI/CD com GitHub Actions
-
-Com as credenciais (XML) obtidas no passo anterior:
-
-1. Acesse o seu repositório no GitHub.
-2. Vá em **Settings > Secrets and variables > Actions > New repository secret**.
-3. Crie um Secret com o Nome: `AZURE_WEBAPP_PUBLISH_PROFILE`.
-4. No campo Value, cole todo o conteúdo do XML gerado e salve.
-
----
-
-### Passo 6: Disparar o Deploy Automático
-
-1. No seu projeto local, certifique-se de que a pasta `.github/workflows/` contém o arquivo `deploy.yml` configurado.
-2. Envie as alterações para o repositório remoto executando:
+1. Envie todas as alterações recentes e o ficheiro de pipeline para o repositório remoto executando os comandos no seu terminal:
 ```bash
 git add .
-git commit -m "Configuração final para o deploy"
+git commit -m "feat: configura pipeline de CI/CD e ajustes finais de deploy"
 git push origin main
 
 ```
 
 
-3. Acompanhe a esteira de CI/CD na aba **Actions** do seu repositório no GitHub.
-4. Quando finalizar com sucesso, acesse a sua API publicamente através da URL:
-🔗 [https://app-space-rm565206.azurewebsites.net/swagger/index.html](https://app-space-rm565206.azurewebsites.net/swagger/index.html)
+2. Acompanhe a esteira de integração contínua acedendo ao separador **Actions** no seu repositório do GitHub até que o processo termine com sucesso (indicado a verde).
+3. Assim que o deploy for concluído, aceda publicamente à API no navegador através do link:
+🔗 [https://app-space-v2-rm565206.azurewebsites.net/](https://www.google.com/search?q=https://app-space-v2-rm565206.azurewebsites.net/)
 
-🎉 Pronto! Sua infraestrutura está provisionada por scripts, integrada por CI/CD e rodando na nuvem.
+🎉 **Pronto!** A sua infraestrutura foi totalmente provisionada por scripts, integrada com sucesso via pipeline de CI/CD do GitHub Actions e encontra-se a executar na nuvem com alta disponibilidade.
 
 ```
 
