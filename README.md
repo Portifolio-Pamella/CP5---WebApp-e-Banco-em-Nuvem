@@ -1,7 +1,3 @@
-Aqui está o ficheiro **`README.md`** completo, estruturado e corrigido para o seu projeto, incluindo a secção de integrantes (com o destaque da representante), a arquitetura, o mapeamento dos endpoints, e um tutorial (*How-To*) detalhado e aprofundado na configuração do **GitHub Actions (CI/CD)** e do **User Secrets**.
-
-Pode copiar todo o conteúdo abaixo diretamente para o seu ficheiro `README.md`:
-
 ```markdown
 # 🚀 ApiSpaceMission - Gerenciamento Espacial
 
